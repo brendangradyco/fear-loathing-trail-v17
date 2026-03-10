@@ -1,0 +1,125 @@
+FEAR & LOATHING TRAIL — V16 CHANGELOG  (v16.3.0)
+Generated: 2026-03-09
+============================================================
+
+| #  | Category          | Change                                              | Status     |
+|----|-------------------|-----------------------------------------------------|------------|
+| 01 | Version           | Title/CFG/manifest/sw bumped to v16                 | DONE       |
+| 02 | Version           | PEER_PREFIX flt16room, STORE_KEY flt16_player       | DONE       |
+| 03 | Trail Stops       | Route redesigned: Las Vegas to Bogota, Colombia     | DONE       |
+|    |                   | (Phoenix / El Paso / Mexico City / Oaxaca /         |            |
+|    |                   |  Guatemala City / Managua / San Jose / Panama City  |            |
+|    |                   |  / Medellin / Bogota)                               |            |
+| 04 | Character Create  | Age buttons replaced with range slider 18-80        | DONE       |
+|    |                   | Live display of chosen age value                    |            |
+| 05 | Geo Location      | Non-blocking geo screen shown before char create    | DONE       |
+|    |                   | Allow/deny: allow pulls skills bonus from lat/lon   |            |
+| 06 | Hunt / DOOM       | Full Wolf3D raycaster replaces v15 parallax engine  | DONE       |
+|    |                   | DFS-generated 22x22 maze, DDA ray casting per column|            |
+|    |                   | Wall height = W*0.72/dist perspective projection    |            |
+|    |                   | Sprite z-buffer: enemies hidden behind walls        |            |
+|    |                   | 4-direction D-pad (forward/back/strafe L/R) mobile  |            |
+|    |                   | Torch sprites with flicker and glow halo            |            |
+|    |                   | Screen-space blood particles on kill (gore splat)   |            |
+|    |                   | Per-tile wall shading: 4 tile types, side darkening |            |
+|    |                   | Enemy sprites projected via camera-plane transform  |            |
+|    |                   | Pixel art per enemy type (bat, freak, flag shirt)   |            |
+|    |                   | Gold outline on heavy/elite tier enemies            |            |
+| 07 | Hunt Timer        | Hunt timer extended: 30s to 90s                     | DONE       |
+| 08 | Travel Screen     | Metal Slug X style cinematic travel screen          | DONE       |
+|    |                   | 5 parallax layers (sky/mountains/mid/fg/road)       |            |
+|    |                   | 5 biomes based on route segment (desert/jungle/     |            |
+|    |                   |   mountain/coast/city)                              |            |
+|    |                   | Road perspective trapezoid with sine-wave inclines  |            |
+|    |                   | Pixel-art car: bounce, lean, wheels, exhaust, glow  |            |
+|    |                   | Background entities every 55 frames: cars, trucks,  |            |
+|    |                   |   pedestrians, UFO tractor beam, bigfoot, Godzilla  |            |
+|    |                   | Mini world map overlay with animated route dot      |            |
+| 09 | Travel Events     | Minimum 3 events per travel leg (up to 4)           | DONE       |
+| 10 | Ration System     | 4 ration tiers selectable from travel screen:       | DONE       |
+|    |                   | tiny_tim (0 supply cost, sanity -5)                 |            |
+|    |                   | normal (1 supply, no modifier)                      |            |
+|    |                   | fat (2 supply, sanity +5)                           |            |
+|    |                   | cholesterol_daddy (3 supply, sanity +10)            |            |
+| 11 | Hustle Mini-game  | Canvas slider timing game; green zone scales with   | DONE       |
+|    |                   | skills.smooth; one use per stop (hustleUsed flag)   |            |
+| 12 | Busk Mini-game    | Simon-says 4-color pad, up to 4 rounds              | DONE       |
+|    |                   | Partial credit on fail; one use per stop (buskUsed) |            |
+| 13 | Shank Mechanic    | 2s dodge window via SHANK_ALERT WebRTC broadcast    | DONE       |
+|    |                   | SHANK_DODGE message sets _shankDodged on attacker   |            |
+| 14 | Per-stop Flags    | hustleUsed/buskUsed/shankUsedThisStop reset on      | DONE       |
+|    |                   | _travelArrive() -- prevents per-stop farming        |            |
+| 15 | UI                | Hustle/Busk show greyed "done" state when used      | DONE       |
+|    |                   | (.btn-used CSS: opacity 45%, pointer-events none)   |            |
+| 16 | Route Timeline    | Total distance rescaled to 5,000 miles              | DONE       |
+| 17 | Route Timeline    | map-canvas expanded to 200px; bottom 44% is route  | DONE       |
+|    |                   | timeline with car sprite + orange progress glow     |            |
+| 18 | Route Timeline    | City stops shown as evenly-spaced dots with emoji   | DONE       |
+|    |                   | labels; completed = green, current = orange pulse   |            |
+| 19 | Route Timeline    | 3 micro-event warning triangles between each stop  | DONE       |
+|    |                   | pair; passed dots dim; active dots show orange ▲    |            |
+| 20 | Route Timeline    | Car sprite moves in real-time along timeline;       | DONE       |
+|    |                   | headlight glow when traveling; miles label under    |            |
+| 21 | Travel Pacing     | Travel now real-time: ~30s per leg in MapAnim RAF   | DONE       |
+|    |                   | loop; stays on scr-map (no scr-travel switch)       |            |
+| 22 | Travel Pacing     | Progress pauses at 25/50/75% to fire micro-event   | DONE       |
+|    |                   | decision card in action-area; resumes after choice  |            |
+| 23 | Travel Pacing     | phase='traveling' shows "On the road..." UI panel  | DONE       |
+|    |                   | Page reload during traveling resets to 'travel'    |            |
+| 24 | Solo Reset        | Solo game (1 player) is NOT saved on page reload    | DONE       |
+|    |                   | Cash resets to default $350 on each fresh start     |            |
+| 25 | Drug System       | Buy Drugs: market screen with 5 drug types, price   | DONE       |
+|    |                   | scales by stop index (cheap near Colombia, pricey   |            |
+|    |                   | early on)                                           |            |
+| 26 | Drug System       | Make Drugs: 4 production methods                    | DONE       |
+|    |                   | -- Cook Meth: timing slider mini-game, $40 chemicals|            |
+|    |                   | -- Process Coke: 15-tap in 5s, $50 equipment        |            |
+|    |                   | -- Grow Weed: passive, harvest in 2 stops           |            |
+|    |                   | -- Moonshine Still: passive, collect next stop      |            |
+| 27 | Drug System       | Sell Drugs: burner phone UI with 8 FIEND contacts   | DONE       |
+|    |                   | Each fiend wants a specific drug at their price     |            |
+|    |                   | High-risk contacts flagged with bust % warning      |            |
+| 28 | Drug System       | Deal Mini-Game "The Drop": heat meter 0-100%        | DONE       |
+|    |                   | Survive 8s mashing STAY COOL to drain heat          |            |
+|    |                   | Random cop/siren events spike heat                  |            |
+|    |                   | Win = cash paid; Lose = stash seized + fine + sanity|            |
+| 29 | Drug System       | Drug inventory shown in stat bar chip (💊 count)    | DONE       |
+|    |                   | Cook flags methCookUsed/cokeCookUsed reset on arrive|            |
+| 30 | DOOM Bug Fix      | Enemy alpha was 1.4/dist -- at dist=5, alpha=0.28   | DONE       |
+|    |                   | Fix: al=1.0 (fully opaque, DOOM-style)              |            |
+| 31 | DOOM Bug Fix      | Enemy sy=H/2-sh*0.9 pushed 90% into dark ceiling   | DONE       |
+|    |                   | Fix: sy=H/2-sh*0.55 (centers at eye-level horizon)  |            |
+| 32 | Player List       | Convoy player list shown in action-area with name   | DONE       |
+|    |                   | and alive/dead status (🟢/💀)                        |            |
+| 33 | Multiplayer       | PeerNet BATCNT default room -- CHUNK 2              | PENDING    |
+| 17 | Multiplayer       | Room browser for full rooms -- CHUNK 2              | PENDING    |
+| 18 | Multiplayer       | In-game copy link button -- CHUNK 2                 | PENDING    |
+| 19 | Multiplayer       | AFK 45s auto-advance -- CHUNK 2                     | PENDING    |
+| 20 | Multiplayer       | ROOM_FULL message + fallback -- CHUNK 2             | PENDING    |
+| 21 | Drug Mechanic     | Production/inventory/phone sell/cash -- CHUNK 3     | PENDING    |
+| 22 | Drug Mechanic     | Meth/PV mini-game skill checks -- CHUNK 3           | PENDING    |
+| 23 | Drug Mechanic     | Cocaine/crack maze mini-game -- CHUNK 3             | PENDING    |
+| 24 | Drug Mechanic     | Marijuana grow with time mechanic -- CHUNK 3        | PENDING    |
+| 25 | Drug Mechanic     | Moonshine still campsite -- CHUNK 3                 | PENDING    |
+| 26 | Drug Mechanic     | Burner phone + fiend selling mechanic -- CHUNK 3    | PENDING    |
+| 27 | Drug Mechanic     | Robbery defense DOOM map -- CHUNK 3                 | PENDING    |
+
+NOTE ON HUNT ENGINE:
+V16 replaces the v15 angle-based parallax hunt with a true Wolf3D raycaster.
+The DDA (Digital Differential Analyzer) algorithm casts one ray per screen column,
+computing wall hit distance for accurate perspective projection. Enemy sprites use
+camera-plane inverse-transform for correct screen positioning and are z-buffered
+so they cannot clip through walls. Forward/back movement with collision detection.
+
+NOTE ON TRAVEL ANIMATION:
+Biomes are determined by stop index:
+  stops 0-2: desert (Las Vegas / Phoenix / El Paso)
+  stops 3-5: jungle (Mexico City / Oaxaca / Guatemala City)
+  stops 6-7: coast (Managua / San Jose / Panama City)
+  stops 8-9: mountain (Medellin approach, Colombia highlands)
+  stop 10:   city (Bogota)
+
+NOTE ON GITHUB REPOS:
+- v16 main: https://github.com/brendangradyco/fear-loathing-trail-v16
+- v15 main: https://github.com/brendangradyco/fear-loathing-trail-v15
+============================================================
